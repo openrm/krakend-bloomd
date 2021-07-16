@@ -85,7 +85,7 @@ type rejecter struct {
 	tokenKeys []string
 }
 
-func (r rejecter) convTokens(claims map[string]interface{}) ([]string, error) {
+func (r rejecter) convTokens(claims map[string]interface{}) []string {
 	tokens := make([]string, len(r.tokenKeys))
 
 	for i, k := range r.tokenKeys {
@@ -110,7 +110,7 @@ func (r rejecter) convTokens(claims map[string]interface{}) ([]string, error) {
 
 	}
 
-	return tokens, nil
+	return tokens
 }
 
 func (r rejecter) calcHash(tokens []string) string {
@@ -136,11 +136,7 @@ func (r rejecter) Reject(claims map[string]interface{}) bool {
 		return false
 	}
 
-	tokens, err := r.convTokens(claims)
-
-	if err != nil {
-		return true
-	}
+	tokens := r.convTokens(claims)
 
 	hashes := make([]string, len(r.tokenKeys) + 1)
 
