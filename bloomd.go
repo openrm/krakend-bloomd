@@ -16,6 +16,7 @@ import (
 
 // namespace
 const Namespace = "github_com/openrm/krakend-bloomd"
+const prefix = "bloomd:"
 
 // consts
 const (
@@ -24,7 +25,6 @@ const (
 )
 
 // errors
-const errPrefix = "bloomd error: "
 var (
 	errNoConfig = errors.New("no config for bloomd")
 	errInvalidConfig = errors.New("invalid config for bloomd")
@@ -44,20 +44,20 @@ func Register(scfg config.ServiceConfig, logger logging.Logger) (jose.Rejecter, 
 	data, ok := scfg.ExtraConfig[Namespace]
 
 	if !ok {
-		logger.Debug(errNoConfig.Error())
+		logger.Debug(prefix, errNoConfig.Error())
 		return nopRejecter{}, errNoConfig
 	}
 
 	raw, err := json.Marshal(data)
 
 	if err != nil {
-		logger.Debug(errInvalidConfig.Error())
+		logger.Debug(prefix, errInvalidConfig.Error())
 		return nopRejecter{}, errInvalidConfig
 	}
 
 	var cfg Config
 	if err := json.Unmarshal(raw, &cfg); err != nil {
-		logger.Debug(err.Error(), string(raw))
+		logger.Debug(prefix, err.Error(), string(raw))
 		return nopRejecter{}, errInvalidConfig
 	}
 
@@ -67,7 +67,7 @@ func Register(scfg config.ServiceConfig, logger logging.Logger) (jose.Rejecter, 
 
 	filter, err := createFilter(cfg.Address, cfg.Name, logger)
 	if err != nil {
-		logger.Error(errPrefix, "error connecting to bloomd:", err)
+		logger.Error(prefix, "error connecting to bloomd:", err)
 		return nopRejecter{}, errInvalidConfig
 	}
 
@@ -121,10 +121,10 @@ func (r rejecter) calcHash(tokens []string) string {
 func (r rejecter) recover() {
 	if err := recover(); err != nil {
 		if err, ok := err.(error); ok {
-			r.logger.Error(errPrefix, err.Error())
+			r.logger.Error(prefix, err.Error())
 		}
 		if err, ok := err.(string); ok {
-			r.logger.Error(errPrefix, err)
+			r.logger.Error(prefix, err)
 		}
 	}
 }
@@ -160,7 +160,7 @@ func (r rejecter) Reject(claims map[string]interface{}) bool {
 	matches, err := r.filter.Multi(hashes)
 
 	if err != nil {
-		r.logger.Error(errPrefix, err.Error())
+		r.logger.Error(prefix, err.Error())
 		_ = setupConn(r.filter, r.logger)
 	}
 
@@ -188,7 +188,7 @@ func setupConn(filter *bloomd.Filter, logger logging.Logger) error {
 		return err
 	}
 
-	logger.Info("connected to bloomd: %v", info)
+	logger.Info("connected to bloomd:", info)
 
 	// XXX needs testing
 	if err := filter.Conn.Socket.SetKeepAlive(true); err != nil {
