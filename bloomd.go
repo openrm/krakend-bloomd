@@ -8,9 +8,10 @@ import (
 	"encoding/json"
 	"crypto/sha256"
 
-	"github.com/luraproject/lura/config"
-	"github.com/luraproject/lura/logging"
-	"github.com/devopsfaith/krakend-jose"
+	"github.com/luraproject/lura/v2/config"
+	"github.com/luraproject/lura/v2/logging"
+	"github.com/devopsfaith/krakend-jose/v2"
+
 	"github.com/geetarista/go-bloomd/bloomd"
 )
 
