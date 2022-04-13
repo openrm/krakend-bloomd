@@ -4,13 +4,12 @@ import (
 	"fmt"
 	"time"
 	"errors"
-	"strings"
 	"encoding/json"
-	"crypto/sha256"
 
-	"github.com/luraproject/lura/config"
-	"github.com/luraproject/lura/logging"
-	"github.com/devopsfaith/krakend-jose"
+	"github.com/luraproject/lura/v2/config"
+	"github.com/luraproject/lura/v2/logging"
+	"github.com/devopsfaith/krakend-jose/v2"
+
 	"github.com/geetarista/go-bloomd/bloomd"
 )
 
@@ -85,40 +84,7 @@ type rejecter struct {
 	tokenKeys []string
 }
 
-func (r rejecter) convTokens(claims map[string]interface{}) []string {
-	tokens := make([]string, len(r.tokenKeys))
-
-	for i, k := range r.tokenKeys {
-
-		v, ok := claims[k]
-
-		if !ok {
-			// XXX
-			// return tokens, errFieldNotExist
-		}
-
-		switch v := v.(type) {
-		case int:
-			tokens[i] = fmt.Sprintf("%d", v)
-		case int64:
-			tokens[i] = fmt.Sprintf("%d", v)
-		case float64:
-			tokens[i] = fmt.Sprintf("%d", int(v))
-		case string:
-			tokens[i] = v
-		}
-
-	}
-
-	return tokens
-}
-
-func (r rejecter) calcHash(tokens []string) string {
-	id := strings.Join(tokens, delimiter)
-	return fmt.Sprintf("%x", sha256.Sum256([]byte(id)))
-}
-
-func (r rejecter) recover() {
+func (r rejecter) handlePanic() {
 	if err := recover(); err != nil {
 		if err, ok := err.(error); ok {
 			r.logger.Error(prefix, err.Error())
@@ -130,21 +96,34 @@ func (r rejecter) recover() {
 }
 
 func (r rejecter) Reject(claims map[string]interface{}) bool {
-	defer r.recover()
+	defer r.handlePanic()
 
 	if r.filter == nil || r.filter.Conn == nil {
 		return false
 	}
 
-	tokens := r.convTokens(claims)
+	i, keys := 0, make([]string, len(r.tokenKeys))
 
-	hashes := make([]string, len(r.tokenKeys) + 1)
+	for _, k := range r.tokenKeys {
 
-	for i, key := range r.tokenKeys {
-		hashes[i] = r.calcHash([]string{key, tokens[i]})
+		v, ok := claims[k]
+
+		if !ok {
+			continue
+		}
+
+		switch v := v.(type) {
+		case int:
+			keys[i] = fmt.Sprintf("%s-%d", k, v)
+		case int64:
+			keys[i] = fmt.Sprintf("%s-%d", k, v)
+		case string:
+			keys[i] = k + "-" + v
+		}
+
+		i++
+
 	}
-
-	hashes[len(r.tokenKeys)] = r.calcHash(tokens)
 
 	// XXX needs testing
 	if r.filter.Conn.Socket != nil {
@@ -153,15 +132,16 @@ func (r rejecter) Reject(claims map[string]interface{}) bool {
 		r.filter.Conn.Socket.SetWriteDeadline(t)
 	}
 
-	matches, err := r.filter.Multi(hashes)
+	responses, err := r.filter.Multi(keys[:i])
 
 	if err != nil {
 		r.logger.Error(prefix, err.Error())
 		_ = setupConn(r.filter, r.logger)
 	}
 
-	for _, v := range matches {
+	for i, v := range responses {
 		if v {
+			r.logger.Info(prefix, "rejecting by key:", keys[i])
 			return true
 		}
 	}
@@ -184,7 +164,7 @@ func setupConn(filter *bloomd.Filter, logger logging.Logger) error {
 		return err
 	}
 
-	logger.Info("connected to bloomd:", info)
+	logger.Info(prefix, "connected to bloomd:", info)
 
 	// XXX needs testing
 	if err := filter.Conn.Socket.SetKeepAlive(true); err != nil {
