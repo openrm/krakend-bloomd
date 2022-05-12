@@ -104,6 +104,8 @@ github.com/devopsfaith/krakend-jose v1.4.0 h1:nHogOJUUdJEqey5wvjdfFMIA9QMAkVr/fD
 github.com/devopsfaith/krakend-jose v1.4.0/go.mod h1:jOnIE67PT1/gOa5HqEI3JZ2ZDK39azi1fihRAqEpOv4=
 github.com/devopsfaith/krakend-jose/v2 v2.0.0 h1:dj4U4URp6h9/s7kuUrCYqqhw4ZgzPGPslvnnAxrz1uo=
 github.com/devopsfaith/krakend-jose/v2 v2.0.0/go.mod h1:xSXEJLDIFjkdRPGVkxLBk9wPw34RtbyUYV/YI5x6nII=
+github.com/devopsfaith/krakend-jose/v2 v2.0.2 h1:eeKzo6E4p6fLPG3ql6roVHYOi+t5oyLiupBZNpVhb7s=
+github.com/devopsfaith/krakend-jose/v2 v2.0.2/go.mod h1:4EITHZ5q22UkTnDtRt46WRdtFPojdKTBxsrLeO8KlYc=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible h1:7qlOGliEKZXTDg6OTjfoBKDXWrumCAMpl/TFQ4/5kLM=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/dimchansky/utfbom v1.1.0 h1:FcM3g+nofKgUteL8dm/UpdRXNC9KmADgTpLKsu0TRo4=
@@ -269,6 +271,8 @@ github.com/luraproject/lura v1.4.1/go.mod h1:KIo1/+nsRZVxIO04Hkbth0GXSSzypvkFpF5
 github.com/luraproject/lura/v2 v2.0.0/go.mod h1:1FhL+5a9uH6o7zMNstXlcjznL5yt2lZ9Q8efanmvw9w=
 github.com/luraproject/lura/v2 v2.0.1 h1:RPnKnBsY2XRdiicFUjUd11SBPJEW+bIL8E3Bd4cKfHA=
 github.com/luraproject/lura/v2 v2.0.1/go.mod h1:1FhL+5a9uH6o7zMNstXlcjznL5yt2lZ9Q8efanmvw9w=
+github.com/luraproject/lura/v2 v2.0.4 h1:Syf7TjWj7pjTvt4BvHHXDHLBxEVuGT2G3PZ4Kzxf5R4=
+github.com/luraproject/lura/v2 v2.0.4/go.mod h1:1FhL+5a9uH6o7zMNstXlcjznL5yt2lZ9Q8efanmvw9w=
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
 github.com/mattn/go-ieproxy v0.0.0-20190610004146-91bb50d98149/go.mod h1:31jz6HNzdxOmlERGGEc4v/dMssOfmp2p5bT/okiKFFc=
 github.com/mattn/go-ieproxy v0.0.0-20190702010315-6dee0af9227d/go.mod h1:31jz6HNzdxOmlERGGEc4v/dMssOfmp2p5bT/okiKFFc=
