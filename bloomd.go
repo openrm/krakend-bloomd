@@ -8,7 +8,7 @@ import (
 
 	"github.com/luraproject/lura/v2/config"
 	"github.com/luraproject/lura/v2/logging"
-	"github.com/devopsfaith/krakend-jose/v2"
+	"github.com/krakendio/krakend-jose/v2"
 
 	"github.com/geetarista/go-bloomd/bloomd"
 )
