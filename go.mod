@@ -1,4 +1,4 @@
-module github.com/openrm/krakend-bloomd
+module github.com/openrm/krakend-bloomd/v2
 
 go 1.17
 
