@@ -4,8 +4,8 @@ go 1.26.0
 
 require (
 	github.com/geetarista/go-bloomd v0.0.0-20140722181834-7f8e8a358bec
-	github.com/krakend/krakend-jose/v2 v2.12.3
 	github.com/luraproject/lura/v2 v2.11.0
+	github.com/openrm/krakend-jose/v2 v2.0.6-0.20260929031149-34d08bec3e3c
 )
 
 require (

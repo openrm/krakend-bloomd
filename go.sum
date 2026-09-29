@@ -141,8 +141,6 @@ github.com/krakend/flatmap v1.2.0 h1:4NPncAKH7Ca/t878kbGlc/LPWLa+m4sgBhs8aT2Q1SY
 github.com/krakend/flatmap v1.2.0/go.mod h1:FyCOoggdVlWr31+aQaOFvBxlMgYfCE5yuwInLbW1/jM=
 github.com/krakend/go-auth0/v2 v2.0.1 h1:Ve73eo/rUo1NK/GrzOeWSuVdweGHY2sGU52NYdp73iU=
 github.com/krakend/go-auth0/v2 v2.0.1/go.mod h1:jaMs1/YcOmZYRUPBvk/nrhABJv/XkrUJGA2eywOUFRA=
-github.com/krakend/krakend-jose/v2 v2.12.3 h1:SowBPHj66n9P2Uchc4TVXge4v3sQKSB8J+hZjEKXi3k=
-github.com/krakend/krakend-jose/v2 v2.12.3/go.mod h1:ikaO8KrlSdXjSVRhNNpEPcVZDBgDygln3V4qPrn3xKc=
 github.com/kylelemons/godebug v1.1.0 h1:RPNrshWIDI6G2gRW9EHilWtl7Z6Sb1BR0xunSBf0SNc=
 github.com/kylelemons/godebug v1.1.0/go.mod h1:9/0rRGxNHcop5bhtWyNeEfOS8JIWk580+fNqagV/RAw=
 github.com/luraproject/lura/v2 v2.11.0 h1:8VxEZSMOG1qSX+7YciB860m+YQ0Rbkc/510MGqJiuPk=
@@ -155,6 +153,8 @@ github.com/mitchellh/go-homedir v1.1.0 h1:lukF9ziXFxDFPkA1vsr5zpc1XuPDn/wFntq5mG
 github.com/mitchellh/go-homedir v1.1.0/go.mod h1:SfyaCUpYCn1Vlf4IUYiD9fPX4A5wJrkLzIz1N1q0pr0=
 github.com/mitchellh/mapstructure v1.5.0 h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=
 github.com/mitchellh/mapstructure v1.5.0/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=
+github.com/openrm/krakend-jose/v2 v2.0.6-0.20260929031149-34d08bec3e3c h1:3QjXps04nqg2yJdjU9zfPqMCUijvQJP6PkISbjWnrDg=
+github.com/openrm/krakend-jose/v2 v2.0.6-0.20260929031149-34d08bec3e3c/go.mod h1:gnUmfErAwVusS3ycwIuprqfdJY6Udh+FbpGlrxpgQJ0=
 github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c h1:+mdjkGKdHQG3305AYmdv1U2eRNDiU2ErMBj1gwrq8eQ=
 github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c/go.mod h1:7rwL4CYBLnjLxUqIJNnCWiEdr3bn6IUYi15bNlnbCCU=
 github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 h1:GFCKgmp0tecUJ0sJuv4pzYCqS9+RGSn52M3FUwPs+uo=
